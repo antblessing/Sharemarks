@@ -12,7 +12,7 @@ class IncomingController < ApplicationController
     
     puts ">>>>> inside incoming - params: #{params.inspect}"
     
-    @user = User.find_by(email: params[:sender])
+    @user = User.first
     @topic = Topic.find_by(title: params[:subject])
     @url = "http://#{params["body-plain"]}"
     
@@ -22,6 +22,7 @@ class IncomingController < ApplicationController
     end
     
     if @topic == nil
+      puts ">>>> creating topic"
       @topic = Topic.create(user: @user, title: params[:subject])
       @topic.save!
     end
