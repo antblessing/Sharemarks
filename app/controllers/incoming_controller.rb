@@ -12,14 +12,11 @@ class IncomingController < ApplicationController
     
     puts ">>>>> inside incoming - params: #{params.inspect}"
     
-    @user = User.first
+    @user = User.find_by(email: params[:sender])
     @topic = Topic.find_by(title: params[:subject])
     @url = "http://#{params["body-plain"]}"
     
-    if @user == nil
-      @user = User.create(email: params[:sender], password: "helloworld")
-      @user.save!
-    end
+
     
     if @topic == nil
       puts ">>>> creating topic"
