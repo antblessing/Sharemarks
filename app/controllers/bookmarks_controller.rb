@@ -10,6 +10,7 @@ class BookmarksController < ApplicationController
   # GET /bookmarks/1
   # GET /bookmarks/1.json
   def show
+    @bookmarks.all = Bookmark.all
   end
 
   # GET /bookmarks/new
@@ -24,6 +25,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks
   # POST /bookmarks.json
   def create
+
     @bookmark = Bookmark.new(bookmark_params)
 
     respond_to do |format|

@@ -6,8 +6,10 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @topic.bookmarks %>
+  <strong>Sharemarks</strong>
+  <%= @bookmarks.each do |bookmark| %>
+  <%= bookmark.url %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_topic_path(@topic) %> |
