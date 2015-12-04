@@ -3,7 +3,7 @@
 <p><strong>#<%= @topic.title %></strong></p>
 
 <p>
-  <%= @bookmarks.each do |bookmark| %>
+  <% @bookmarks.each do |bookmark| %>
     <p><%= bookmark.url %></p>
   <% end %>
 </p>

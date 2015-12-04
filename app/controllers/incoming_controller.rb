@@ -8,27 +8,32 @@ class IncomingController < ApplicationController
 
 
     # You put the message-splitting and business
-    # magic here. 
-    
-    #puts ">>>>> inside incoming - params: #{params.inspect}"
-    
-    @user = User.find_by(email: params[:sender])
-    @topic = Topic.find_by(title: params[:subject])
-    @url = "http://#{params["body-plain"]}"
-    
+    # magic here.
 
-    
-    if @topic == nil
-      #puts ">>>> creating topic"
-      @topic = Topic.create(user: @user, title: params[:subject])
-      @topic.save!
+    #puts ">>>>> inside incoming - params: #{params.inspect}"
+
+    @user = User.find_by(email: params[:sender])
+    if @user
+      @topic = Topic.find_by(title: params[:subject])
+      @url = "http://#{params["body-plain"]}"
+
+
+
+      if @topic == nil
+        #puts ">>>> creating topic"
+        @topic = Topic.create(user: @user, title: params[:subject])
+        @topic.save!
+      end
+
+      @bookmark = Bookmark.create(url: @url, topic: @topic)
+      @bookmark.save!
+      head 200
+    else
+      head 404
     end
-    
-    @bookmark = Bookmark.create(url: @url, topic: @topic)
-    @bookmark.save!
-    
+
     #puts ">>>> bookmark: #{@bookmark.inspect}"
-    
+
       # Find the user by using params[:sender]
       # Find the topic by using params[:subject]
       # Assign the url to a variable after retreiving it from params["body-plain"]
@@ -40,7 +45,7 @@ class IncomingController < ApplicationController
       # Now that you're sure you have a valid user and topic, build and save a new bookmark
 
 
-    # Assuming all went well. 
-    head 200
+    # Assuming all went well.
+    #head 200
   end
 end

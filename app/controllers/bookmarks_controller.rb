@@ -1,6 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_topic
   # GET /bookmarks
   # GET /bookmarks.json
   def index
@@ -26,7 +26,7 @@ class BookmarksController < ApplicationController
   # POST /bookmarks.json
   def create
 
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = @topic.bookmarks.new(bookmark_params)
 
     respond_to do |format|
       if @bookmark.save
@@ -71,6 +71,10 @@ class BookmarksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
-      params.require(:bookmark).permit(:url, :topic_id)
+      params.require(:bookmark).permit(:url)
+    end
+
+    def set_topic
+      @topic = Topic.find(params[:topic_id])
     end
 end
