@@ -10,7 +10,7 @@ class IncomingController < ApplicationController
     # You put the message-splitting and business
     # magic here. 
     
-    puts ">>>>> inside incoming - params: #{params.inspect}"
+    #puts ">>>>> inside incoming - params: #{params.inspect}"
     
     @user = User.find_by(email: params[:sender])
     @topic = Topic.find_by(title: params[:subject])
@@ -19,7 +19,7 @@ class IncomingController < ApplicationController
 
     
     if @topic == nil
-      puts ">>>> creating topic"
+      #puts ">>>> creating topic"
       @topic = Topic.create(user: @user, title: params[:subject])
       @topic.save!
     end
@@ -27,7 +27,7 @@ class IncomingController < ApplicationController
     @bookmark = Bookmark.create(url: @url, topic: @topic)
     @bookmark.save!
     
-    puts ">>>> bookmark: #{@bookmark.inspect}"
+    #puts ">>>> bookmark: #{@bookmark.inspect}"
     
       # Find the user by using params[:sender]
       # Find the topic by using params[:subject]
