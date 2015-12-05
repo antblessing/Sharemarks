@@ -1,17 +1,9 @@
 class IncomingController < ApplicationController
 
-  # http://stackoverflow.com/questions/1177863/how-do-i-ignore-the-authenticity-token-for-specific-actions-in-rails
   skip_before_action :verify_authenticity_token, only: [:create]
   skip_before_action :authenticate_user!
 
   def create
-
-
-    # You put the message-splitting and business
-    # magic here.
-
-    #puts ">>>>> inside incoming - params: #{params.inspect}"
-
     @user = User.find_by(email: params[:sender])
     if @user
       @topic = Topic.find_by(title: params[:subject])
@@ -20,7 +12,6 @@ class IncomingController < ApplicationController
 
 
       if @topic == nil
-        #puts ">>>> creating topic"
         @topic = Topic.create(user: @user, title: params[:subject])
         @topic.save!
       end
@@ -31,9 +22,6 @@ class IncomingController < ApplicationController
     else
       head 404
     end
-
-    #puts ">>>> bookmark: #{@bookmark.inspect}"
-
       # Find the user by using params[:sender]
       # Find the topic by using params[:subject]
       # Assign the url to a variable after retreiving it from params["body-plain"]

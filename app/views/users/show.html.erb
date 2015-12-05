@@ -1,0 +1,5 @@
+<% if current_user.username == nil %>
+  <p><%= current_user.email %>'s Bookmarks</p>
+<% else %>
+  <p><%= current_user.username %>'s Bookmarks</p>
+<% end %>
