@@ -3,14 +3,11 @@ class BookmarksController < ApplicationController
   before_action :set_topic
   # GET /bookmarks
   # GET /bookmarks.json
-  def index
-    @bookmarks = Bookmark.all
-  end
 
   # GET /bookmarks/1
   # GET /bookmarks/1.json
   def show
-    @bookmarks.all = Bookmark.all
+    @bookmarks = Bookmark.all
   end
 
   # GET /bookmarks/new
@@ -20,17 +17,16 @@ class BookmarksController < ApplicationController
 
   # GET /bookmarks/1/edit
   def edit
+
   end
 
   # POST /bookmarks
   # POST /bookmarks.json
   def create
-
     @bookmark = @topic.bookmarks.new(bookmark_params)
-
     respond_to do |format|
       if @bookmark.save
-        format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
+        format.html { redirect_to @topic, notice: 'Bookmark was successfully created.' }
         format.json { render :show, status: :created, location: @bookmark }
       else
         format.html { render :new }
@@ -58,7 +54,7 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark.destroy
     respond_to do |format|
-      format.html { redirect_to bookmarks_url, notice: 'Bookmark was successfully destroyed.' }
+      format.html { redirect_to @topic, notice: 'Bookmark was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

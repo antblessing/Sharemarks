@@ -5,8 +5,12 @@
 <p>
   <% @bookmarks.each do |bookmark| %>
     <p><%= bookmark.url %></p>
+    <%= link_to 'Edit', edit_topic_bookmark_path(@topic,bookmark) %>
+    <br />
   <% end %>
 </p>
+
+<%= link_to 'New Bookmark', new_topic_bookmark_path(@topic) %> |
 
 <%= link_to 'Edit', edit_topic_path(@topic) %> |
 <%= link_to 'Back', topics_path %>
