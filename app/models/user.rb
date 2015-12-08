@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   attr_accessor :login
   has_many :topics
-  
+  has_many :likes, dependent: :destroy
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
       if login = conditions.delete(:login)
@@ -14,10 +15,14 @@ class User < ActiveRecord::Base
         where(conditions.to_h).first
       end
   end
-  
+
   validates :username,
   :presence => true,
   :uniqueness => {
     :case_sensitive => false
   }
+
+  def liked(post)
+    likes.where(bookmark_id: bookmark.id).first
+  end
 end

@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p><%= @bookmark.url %></p>
+<%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
+
 
 <%= link_to 'Edit', edit_topic_bookmark_path(@topic,@bookmark) %> |
 <%= link_to 'Delete', [@topic, @bookmark], method: :delete %> |
