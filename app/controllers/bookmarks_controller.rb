@@ -53,6 +53,7 @@ class BookmarksController < ApplicationController
   # DELETE /bookmarks/1
   # DELETE /bookmarks/1.json
   def destroy
+    authorize (@bookmark)
     @bookmark.destroy
     respond_to do |format|
       format.html { redirect_to @topic, notice: 'Bookmark was successfully destroyed.' }
