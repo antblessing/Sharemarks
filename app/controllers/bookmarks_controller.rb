@@ -38,6 +38,7 @@ class BookmarksController < ApplicationController
   # PATCH/PUT /bookmarks/1
   # PATCH/PUT /bookmarks/1.json
   def update
+    authorize(@bookmark)
     respond_to do |format|
       if @bookmark.update(bookmark_params)
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully updated.' }
