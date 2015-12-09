@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resources :bookmarks
   end
 
+  resources :bookmarks, only: [] do
+    resources :likes, only: [:create, :destroy]
+  end
+
   devise_for :users
   resources :users, :only => [:show]
 

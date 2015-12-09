@@ -18,7 +18,9 @@
         <td><%= bookmark.topic %></td>
         <br />
         <td><%= link_to 'Show', topic_bookmark_path %></td>
-        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+        <td>
+          <%= link_to 'Edit', edit_bookmark_path(bookmark) %>
+        </td>
         <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
