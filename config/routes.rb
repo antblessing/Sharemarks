@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   get 'users/show'
 
   resources :topics do
-    resources :bookmarks do
-      resources :likes, only: [:create, :destroy]
-    end
+    resources :bookmarks
+  end
+
+  resources :bookmarks, only: [] do
+    resources :likes, only: [:create, :destroy]
   end
 
   devise_for :users

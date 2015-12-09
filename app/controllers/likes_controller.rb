@@ -3,25 +3,28 @@ class LikesController < ApplicationController
     @bookmark = Bookmark.find(params[:bookmark_id])
     like = current_user.likes.build(bookmark: @bookmark)
 
-    if like.save
-      format.html { redirect_to @bookmark, notice: 'Like was successfull.' }
-      format.json { render :show, status: :created, location: @bookmark }
-    else
-      format.html { redirect_to @bookmark }, notice: 'Like failed.'
-      format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if like.save
+        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Like was successfully created.' }
+        format.json { render :show, status: :created, location: @bookmark }
+      else
+        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Like failed.' }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @bookmark = Bookmark.find(params[:bookmark_id])
-    like = current_user.likes.build(bookmark: @bookmark)
-
-    if like.destroy
-      format.html { redirect_to @bookmark, notice: 'Unliked.' }
-      format.json { render :show, status: :created, location: @bookmark }
-    else
-      format.html { redirect_to @bookmark }
-      format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+    like = current_user.likes.find_by(bookmark: @bookmark)
+    respond_to do |format|
+      if like.destroy
+        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Unliked.' }
+        format.json { render :show, status: :created, location: @bookmark }
+      else
+        format.html { redirect_to [@bookmark.topic, @bookmark] }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

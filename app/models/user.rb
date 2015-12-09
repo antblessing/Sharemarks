@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
 
-  def liked(post)
+  def liked(bookmark)
     likes.where(bookmark_id: bookmark.id).first
   end
 end
