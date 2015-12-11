@@ -1,5 +1,8 @@
 <% if current_user.username == nil %>
-  <p><%= current_user.email %>'s Bookmarks</p>
+  <p><%= @user.email %>'s Bookmarks</p>
 <% else %>
-  <p><%= current_user.username %>'s Bookmarks</p>
+  <p><%= @user.username %>'s Bookmarks</p>
 <% end %>
+
+<p>Created topics</p>
+  <p><% @topics %></p>

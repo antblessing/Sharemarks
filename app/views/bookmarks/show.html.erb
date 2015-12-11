@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
 
-<p><%= @bookmark.url %></p>
-<%= render partial: 'likes/like', locals: { bookmark: @bookmark } %>
+<h3><%= @bookmark.url %></h3>
+<p><%= render partial: 'likes/like', locals: { bookmark: @bookmark } %></p>
 
 
 <%= link_to 'Edit', edit_topic_bookmark_path(@topic,@bookmark) %> |
