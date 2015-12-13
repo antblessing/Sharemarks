@@ -4,9 +4,4 @@
 <%= link_to 'New Topic', new_topic_path, class: 'btn btn-success' %>
 <p></p>
 
-<% @topics.each do |topic| %>
-  <h3>#<%= link_to topic.title, topic %></h3>
-  <%= link_to 'Edit', edit_topic_path(topic), class: 'btn btn-success btn-xs' %>
-  <%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' },class: 'btn btn-danger btn-xs' %>
-  <p></p>
-<% end %>
+<%= render @topics %>

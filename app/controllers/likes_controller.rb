@@ -5,10 +5,10 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if like.save
-        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Like was successfully created.' }
+        format.html { redirect_to :back, notice: 'Like was successfully created.' }
         format.json { render :show, status: :created, location: @bookmark }
       else
-        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Like failed.' }
+        format.html { redirect_to :back, notice: 'Like failed.' }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
     end
@@ -19,10 +19,10 @@ class LikesController < ApplicationController
     like = current_user.likes.find_by(bookmark: @bookmark)
     respond_to do |format|
       if like.destroy
-        format.html { redirect_to [@bookmark.topic, @bookmark], notice: 'Unliked.' }
+        format.html { redirect_to :back, notice: 'Unliked.' }
         format.json { render :show, status: :created, location: @bookmark }
       else
-        format.html { redirect_to [@bookmark.topic, @bookmark] }
+        format.html { redirect_to :back }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
     end

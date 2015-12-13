@@ -1,0 +1,9 @@
+<tr>
+  <td><%= bookmark.url %></td>
+  <td><%= render partial: 'likes/like', locals: { bookmark: bookmark } %></td>
+  </td>
+  <td><%= link_to 'Edit', edit_topic_bookmark_path(bookmark.topic, bookmark) %>
+  </td>
+  <td><%= link_to 'Destroy', [bookmark.topic, bookmark], method: :delete, data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

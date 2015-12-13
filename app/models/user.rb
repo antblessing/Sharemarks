@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   attr_accessor :login
   has_many :topics
+  has_many :bookmarks, through: :topics
   has_many :likes, dependent: :destroy
 
   def self.find_for_database_authentication(warden_conditions)
